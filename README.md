@@ -10,16 +10,16 @@ The program you write in this project will run from the command line. It won't t
 
 This program uses DB views but it can create them by itself. If it's the first time you're running it, make sure to run it with the `--reloadviews` arg or create it manually with the query below. It shows a nice error message otherwise though. :)
 
-```create or replace view requests_per_day as
-    (select tl.datet as day, count(lo.id) as erroneous_requests, tl.c
-     as total_requests
-        from "public"."log" as lo
-        join (select date_trunc('day', time) as datet, count(time) as
-        c from "public".log group by datet) as tl
-            on date_trunc('day', lo.time) = tl.datet
-        where lo.status not like '2%'
-        group by tl.datet, tl.c
-        order by tl.datet);
+```
+    create or replace view requests_per_day as
+        (select tl.datet as day, count(lo.id) as erroneous_requests, tl.c as total_requests
+            from "public"."log" as lo
+            join (select date_trunc('day', time) as datet, count(time) as
+            c from "public".log group by datet) as tl
+                on date_trunc('day', lo.time) = tl.datet
+            where lo.status not like '2%'
+            group by tl.datet, tl.c
+            order by tl.datet);
 ```
 
 ## Usage
