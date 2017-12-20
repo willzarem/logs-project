@@ -130,7 +130,8 @@ if __name__ == '__main__':
                         choices=['top3articles', 'topauthors', 'erroneousday',
                                  'all'])
     parser.add_argument('--reloadviews',
-                        action='store_true')
+                        action='store_true',
+                        help='Create anew the views required for this program')
 
     args = parser.parse_args()
 
